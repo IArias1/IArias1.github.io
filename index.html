@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ignacio Arias — Game Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0e0f;
+    --bg2: #141517;
+    --bg3: #1c1d20;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.18);
+    --text: #e8e4dc;
+    --text-muted: #8a8680;
+    --accent: #c9a96e;
+    --accent2: #7eb8a4;
+    --tag-bg: rgba(201,169,110,0.1);
+    --tag-color: #c9a96e;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(13,14,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.15rem;
+    letter-spacing: 0.5px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 3rem 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .hero-eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .hero-name {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.5px;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-bio {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.65rem 1.5rem;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #0d0e0f;
+  }
+  .btn-primary:hover { background: transparent; color: var(--accent); }
+  .btn-outline {
+    background: transparent;
+    border-color: var(--border-hover);
+    color: var(--text-muted);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* SECTION */
+  section { padding: 6rem 3rem; max-width: 900px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'EB Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1rem;
+  }
+
+  /* PROJECTS */
+  .project-card {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .project-card:hover { border-color: var(--border-hover); }
+  .project-card:last-child { border-bottom: none; }
+  .project-meta { padding-top: 0.2rem; }
+  .project-number {
+    font-family: 'EB Garamond', serif;
+    font-size: 3rem;
+    color: var(--border-hover);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    font-style: italic;
+  }
+  .project-engine {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent2);
+  }
+  .project-content {}
+  .project-name {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .project-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .tag {
+    font-size: 0.7rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    background: var(--tag-bg);
+    color: var(--tag-color);
+    border: 1px solid rgba(201,169,110,0.2);
+  }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .project-link:hover { color: var(--accent); }
+  .project-link svg { width: 12px; height: 12px; transition: transform 0.2s; }
+  .project-link:hover svg { transform: translate(2px, -2px); }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+  .skill-item {
+    background: var(--bg);
+    padding: 1.5rem;
+    transition: background 0.2s;
+  }
+  .skill-item:hover { background: var(--bg3); }
+  .skill-name {
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.35rem;
+  }
+  .skill-desc { font-size: 0.82rem; color: var(--text-muted); }
+
+  /* CONTACT */
+  .contact-row {
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    align-items: center;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .project-card { grid-template-columns: 1fr; gap: 0.5rem; }
+    .project-number { font-size: 2rem; margin-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Ignacio Arias</a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Game Developer &amp; Systems Programmer</p>
+  <h1 class="hero-name">Ignacio<br><em>Arias</em></h1>
+  <p class="hero-bio">
+    Full Sail University · Game Development BSc graduating September 2026.
+    I build games and the systems underneath them — from Unreal Engine C++ shooters to Vulkan renderers, procedural generation, and encrypted networking.
+  </p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#projects">View Projects</a>
+    <a class="btn btn-outline" href="https://github.com/Gian-Mo" target="_blank">GitHub</a>
+    <a class="btn btn-outline" href="mailto:ignacioarias8286@gmail.com">Email Me</a>
+  </div>
+</div>
+
+<section id="projects">
+  <p class="section-label">Selected Work</p>
+  <h2 class="section-title">Projects</h2>
+
+  <div class="project-card">
+    <div class="project-meta">
+      <div class="project-number">01</div>
+      <div class="project-engine">Unreal Engine 5</div>
+    </div>
+    <div class="project-content">
+      <h3 class="project-name">Unreal Shooter</h3>
+      <p class="project-desc">
+        A third-person shooter built entirely in C++ on Unreal Engine 5. Covers the full game stack: animation state machines, weapon and projectile systems, a health and HUD system, AI agents, and physics-based death ragdolls — all converted from Blueprint to native C++.
+      </p>
+      <div class="project-tags">
+        <span class="tag">Unreal Engine 5</span>
+        <span class="tag">C++</span>
+        <span class="tag">AI Agents</span>
+        <span class="tag">Gameplay Systems</span>
+      </div>
+      <a class="project-link" href="https://github.com/IArias1/UnrealShooterProject" target="_blank">
+        View on GitHub
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M2 10L10 2M4 2h6v6"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-meta">
+      <div class="project-number">02</div>
+      <div class="project-engine">Unity · C#</div>
+    </div>
+    <div class="project-content">
+      <h3 class="project-name">Tower Climber</h3>
+      <p class="project-desc">
+        An endless rogue-like where the player climbs a procedurally generated tower while outrunning rising lava and avoiding enemies. Features a chunk streaming system that dynamically creates and culls tower segments for performance, alongside procedural enemy spawning and player pick-ups. Led a team of six through rapid development.
+      </p>
+      <div class="project-tags">
+        <span class="tag">Unity</span>
+        <span class="tag">C#</span>
+        <span class="tag">HLSL</span>
+        <span class="tag">Procedural Gen</span>
+        <span class="tag">Team Lead</span>
+      </div>
+      <a class="project-link" href="https://github.com/Gian-Mo/PFF2-Team-Project" target="_blank">
+        View on GitHub
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M2 10L10 2M4 2h6v6"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="project-card">
+    <div class="project-meta">
+      <div class="project-number">03</div>
+      <div class="project-engine">Unity · C#</div>
+    </div>
+    <div class="project-content">
+      <h3 class="project-name">Dark Dagger</h3>
+      <p class="project-desc">
+        A stealth shooter with rogue-like progression and procedurally generated maps. Personally authored the weapon systems, the random map generation algorithm, and all player interaction code. Co-led a team of three through a compressed rapid-development sprint.
+      </p>
+      <div class="project-tags">
+        <span class="tag">Unity</span>
+        <span class="tag">C#</span>
+        <span class="tag">HLSL</span>
+        <span class="tag">Stealth</span>
+        <span class="tag">Procedural Gen</span>
+      </div>
+      <a class="project-link" href="https://github.com/Gian-Mo/PPF3-TeamProject" target="_blank">
+        View on GitHub
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M2 10L10 2M4 2h6v6"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <p class="section-label">Toolbox</p>
+  <h2 class="section-title">Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-item"><div class="skill-name">C / C++</div><div class="skill-desc">Vulkan renderers, game engine systems, networking</div></div>
+    <div class="skill-item"><div class="skill-name">Unreal Engine 5</div><div class="skill-desc">Native C++, gameplay framework, AI, animation</div></div>
+    <div class="skill-item"><div class="skill-name">Unity</div><div class="skill-desc">C#, ShaderLab, HLSL, multiple shipped projects</div></div>
+    <div class="skill-item"><div class="skill-name">Vulkan</div><div class="skill-desc">3D pipeline, PBR rendering, bindless textures</div></div>
+    <div class="skill-item"><div class="skill-name">Python</div><div class="skill-desc">Discord bot, automation, coursework</div></div>
+    <div class="skill-item"><div class="skill-name">Networking</div><div class="skill-desc">TCP/UDP, OpenSSL, select() multiplexing</div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <p class="section-label">Get in Touch</p>
+  <h2 class="section-title">Contact</h2>
+  <p style="color:var(--text-muted); margin-bottom:2rem; font-size:0.95rem;">
+    Open to game development internships and junior roles. Based in Winter Park, FL.
+  </p>
+  <div class="contact-row">
+    <a class="btn btn-primary" href="mailto:ignacioarias8286@gmail.com">ignacioarias8286@gmail.com</a>
+    <a class="btn btn-outline" href="https://github.com/Gian-Mo" target="_blank">GitHub — Gian-Mo</a>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Ignacio Arias
+</footer>
+
+</body>
+</html>
